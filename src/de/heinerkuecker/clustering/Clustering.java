@@ -52,6 +52,8 @@ public class Clustering
             clusters.add( new ArrayList<>( Arrays.asList( element ) ) );
             //countOfNewAddedSingleCluster++;
 
+            // Possible improvement in performance, not measured.
+            // Mögliche Verbesserung Performance, nicht gemessen.
             //if ( countOfNewAddedSingleCluster > 3 )
             //{
             //    joinAdjacentCluster(
