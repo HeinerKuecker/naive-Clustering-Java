@@ -3,6 +3,7 @@ package de.heinerkuecker.clustering;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Assert;
@@ -106,15 +107,15 @@ public class ClusteringTest
             final List<List<Integer>> clusters ,
             final Integer... expectedValues )
     {
-        final Collection<Integer> expectedValuesSet =
+        final Collection<Integer> expectedValueList =
                         Arrays.asList(
                                 expectedValues );
 
-        for ( List<Integer> cluster : clusters )
+        for ( final List<Integer> cluster : clusters )
         {
-            if ( cluster.size() == expectedValuesSet.size() )
+            if ( cluster.size() == expectedValueList.size() )
             {
-                if ( cluster.containsAll( expectedValuesSet ) )
+                if ( new HashSet<>( cluster ).containsAll( expectedValueList ) )
                 {
                     return;
                 }
