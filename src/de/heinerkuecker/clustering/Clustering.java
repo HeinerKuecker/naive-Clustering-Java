@@ -5,28 +5,30 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Clustering.
+ *
+ * @author Heiner K&uuml;cker
+ */
 public class Clustering
 {
+    /**
+     * Clustering.
+     *
+     * @param elementsToCluster elements (objects) to cluster
+     * @param clusterCriteria cluster criteria
+     * @return list of clusters
+     * @param <E> type of elements (objects) to cluster
+     */
     public static <E> List<List<E>> clustering(
-            final Collection<E> elementsToCluster ,
-            final ClusterCriteria<E> clusterCriteria )
+            final Collection<? extends E> elementsToCluster ,
+            final ClusterCriteria<? super E> clusterCriteria )
     {
         final List<E> elementList = new ArrayList<>( elementsToCluster ); // keep given collection unchanged
 
         final List<List<E>> clusters = new ArrayList<>();
 
-        if ( elementList.isEmpty() )
-        {
-            return clusters;
-        }
-
-        {
-            final E firstElement = elementList.remove( elementList.size() - 1 );
-            // new cluster
-            clusters.add( new ArrayList<>( Arrays.asList( firstElement ) ) );
-        }
-
-        //int countOfNewAddedSingleCluster = 1;
+        //int countOfNewAddedSingleCluster = 0;
 
         VALUE_LOOP : while ( ! elementList.isEmpty() )
         {
@@ -68,7 +70,7 @@ public class Clustering
 
     private static <E> void joinAdjacentClusters(
             final List<List<E>> clusters ,
-            final ClusterCriteria<E> clusterCriteria )
+            final ClusterCriteria<? super E> clusterCriteria )
     {
         REPEAT: do
         {
@@ -102,7 +104,7 @@ public class Clustering
     private static <E> boolean isAdjacent(
             final List<? extends E> cluster0 ,
             final List<? extends E> cluster1 ,
-            final ClusterCriteria<E> clusterCriteria )
+            final ClusterCriteria<? super E> clusterCriteria )
     {
         for ( final E value0 : cluster0 )
         {
